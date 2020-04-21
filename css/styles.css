@@ -1,0 +1,491 @@
+*{
+	margin: 0;
+	padding: 0;
+	font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+section.buttons {
+	width: 100%;
+	display: block;
+}
+div.orderOption i {
+	cursor: pointer;
+}
+i.fas, i.far {
+	margin-right: 0.3em;
+}
+i.fa-download, i.fa-save, i.fa-file-import {
+	color: #3D9970;
+}
+i.fa-plus, i.fa-check, p.note.success {
+	color: #2ECC40;
+}
+i.fa-minus, i.fa-times, p.note.error {
+	color: #FF4136;
+}
+a.button {
+	border: 2px solid black;
+	padding: 0.5em 0.5em;
+	display: inline-block;
+	margin: 1em 0 0;
+}
+a.button:hover {
+	cursor: pointer;
+}
+div.choice a.button.remove,
+aside.addChoice a.button.remove{
+	border: 0px solid black;
+}
+div.preview {
+	border: 1px solid #ccc;
+	background-color: #f6f6f6;
+	box-sizing: border-box;
+	padding: 10px;
+}
+div.preview p {
+	word-break: break-all;
+	font-size: 14px;
+}
+/* General class used to init elements to hidden */
+.hide {
+	display: none;
+}
+article#ordering > div:first-of-type {
+	order: 1;
+}
+/* Start
+from generalstyle.css */
+a{
+	color: black;
+}
+
+body{
+	font-size: 18px;
+}
+code{
+  color: #f66;
+}
+
+h2, p{
+	/*margin: 10px;*/
+	color: #333;
+}
+
+h2{
+	font-size: 18px;
+}
+
+html,
+body,
+#questions,
+#answers,
+#numerical{
+  height: 100%;
+  color: #333;
+}
+
+img.example{
+    height: auto;
+    width: 100%;
+}
+
+input{
+	/*
+	width: 100%;
+	*/
+}
+.navbar{
+	margin-bottom:0px;
+}
+.navbar-inverse{
+	background-color: black;
+	border-color: black;
+}
+.numerical,
+#numerical div{
+	width: 32.5%;
+	display: inline-block;
+	height: 100%;
+	vertical-align: top;
+	box-sizing: border-box;
+	padding: 20px;
+	background-color: #f6f6f6;
+	font-size: 14px;
+	border: 1px solid #ccc;
+}
+
+p{
+	/*margin: 5px 0px 5px 10px;*/
+	font-size: 14px;
+	margin: 0 !important;
+}
+.row{
+	margin: 0;
+}
+
+.row:after{
+	content: "";
+	display: table;
+	clear: both;
+}
+#row ul,
+#row li{
+	font-size: 25px;
+}
+input.csv{
+	margin: 1em auto 0;
+}
+.settings{
+	/*
+	padding: 10px;
+	width: 8%;
+	*/
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1em;
+}
+
+.settings select{
+	width: 25%;
+	margin: 0 auto;
+}
+.tab{
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+.tab button{
+	background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+.tab button:hover{
+    background-color: #ddd;
+}
+.tab button.active{
+    background-color: #ccc;
+}
+.tabcontent{
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+table{
+    border-collapse: collapse;
+	width: 100%;
+}
+table, td, th{
+    border: 1px solid black;
+	text-align: center;
+}
+#TInput
+{
+	height: 40px;
+}
+
+textarea,
+#questions div,
+#answers div{
+    display: inline-block;
+    width: 100%;
+    height: auto;/*100%;*/
+    vertical-align: top;
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: #f6f6f6;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    }
+
+.questionCounter,
+.head{
+	justify-content: space-evenly !important;
+	text-align: center;
+}
+
+.head .button{
+	margin: 0;
+}
+
+textarea, div.preview p{
+    resize: none;
+    outline: none;
+    font-family: 'Monaco', courier, monospace;
+}
+/* end of generalstyle.css */
+
+header{
+	text-align: center;
+	background-color: #f1f1f1;
+}
+
+.pageTitle{
+	padding: 1.5em;
+}
+
+article.collection > .question{
+	background-color: rgba(226, 226, 226, 0.5);
+}
+
+section.question /*div.question > */article{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+article#ma{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	text-align: center;
+}
+
+article#ma aside.addChoice{
+	display: flex;
+	flex-wrap: wrap;
+	/*flex-direction: column;*/
+	justify-content: space-around;
+	width: 100%;
+}
+
+aside.addChoice{
+	margin: 0 auto;
+}
+
+/* temporarily removed
+section.question article aside,*/
+.qHolder,
+#ess > aside,
+#tf > aside/*,
+#ma > aside*/{
+	width: 45%;
+}
+
+#num > aside{
+	width: 30%;
+}
+
+#ord .answers{
+	margin: 0 auto;
+}
+
+#ord .answers .orderOption{
+	margin: 1em 0;
+}
+
+#tf > aside,
+#mc div.choice > aside{
+	margin: 0 auto;
+	width: max-content;
+}
+
+#ess h3,
+#tf h3,
+#ma h3,
+#ma > div,
+#mc > div,
+#ord > div{
+	width: 100%;
+	text-align: center;
+}
+
+section.question > label{
+	display: block;
+}
+
+label.inline{
+	display: inline-block;
+}
+
+div.collection article.variable,
+#faqContainer{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	padding: .5em;
+	box-sizing: border-box;
+}
+
+div.collection article.variable:nth-child(even){
+	background-color: lightgrey;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+article.variable > div.head .button{
+	margin: 1em 0;
+}
+
+article.poolTitle{
+	width: 80%;
+	margin: 0 auto;
+}
+
+input.poolTitle{
+	width: 100%;
+}
+
+article.poolSettings {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+article.poolSettings aside{
+	width: 25%;
+	text-align: center;
+}
+article.poolSettings input {
+	width: 100%;
+	margin: 0 auto;
+}
+article.poolSettings label {
+	display: block;
+}
+
+#answerContainer,
+#multiChoiceAnswer,
+#multiAnswer,
+#trueFalse,
+#essay,
+#ordering{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+/* temporarily removed
+#answerContainer aside{
+	width: 30%;
+}
+*/
+/*
+.answerType{
+	display: flex;
+	justify-content: space-between;
+}
+*/
+article.variable aside{
+	display: flex;
+	flex-direction: column;
+}
+
+#mc aside.addChoice{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+#mc div.choice{
+
+}
+
+.buttons{
+	margin: 1.5em 0;
+	text-align: center;
+}
+
+div.divider {
+    height: /*.1em*/2px;
+    width: 100%;
+    margin: 3em auto;
+    background: black;
+}
+
+@media only screen and (max-width: 540px){
+	.qHolder,
+	#ess > aside,
+	#tf > aside,
+	#num > aside{
+		width: 100%;
+	}
+
+	article.poolSettings {
+		width: 100%;
+		display: flex;
+		flex-direction: column !important;
+	}
+	article.poolSettings aside{
+		width: 90% !important;
+		text-align: center;
+		margin: 0 auto;
+	}
+
+	div.question.body,
+	article.poolTitle{
+		text-align: center;
+	}
+
+	.settings > label{
+		display: block !important;
+	}
+
+	#faqContainer > .question{
+		width: 80% !important;
+		margin: 0 auto;
+	}
+	article.variable aside{
+		width: 80% !important;
+	}
+}
+
+@media only screen and (max-width: 767px){
+	article.poolSettings {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+	article.poolSettings aside{
+		width: 40%;
+		text-align: center;
+		margin: 0 auto;
+	}
+
+	#faqContainer > .question{
+		width: 45%;
+	}
+	article.variable aside{
+		width: 45%;
+	}
+
+	article.collection > .question{
+		box-sizing: border-box;
+	    padding: 1.5em;
+	    margin: 1.5em;
+	    border: 1px solid black;
+	}
+
+}
+
+@media only screen and (min-width: 768px){
+	#faqContainer > .question{
+		width: 45%;
+	}
+	article.variable aside{
+		width: 20%;
+	}
+
+	article.collection > .question{
+		box-sizing: border-box;
+		padding: 1em 2.5em;
+		margin: 2.5em;
+		border: 1px solid black;
+	}
+}
+
+@media only screen and (min-width: 1024px){
+	/*
+	#faqContainer > .question{
+		width: 30%;
+	}
+	*/
+}

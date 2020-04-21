@@ -1,0 +1,293 @@
+<html>
+    <head>
+        <title>TiF</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://unpkg.com/marked@0.3.6"></script>
+        <script src="https://unpkg.com/lodash@4.16.0"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+        <script src="https://stuk.github.io/jszip/dist/jszip.js"></script>
+        <script src="https://stuk.github.io/jszip/vendor/FileSaver.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <header class="main">
+            <nav id="navigation-placeholder"></nav>
+            <section class="pageTitle">
+    			<h1>BlackBoard Question Pool Maker</h1>
+    			<p>To view instructions please visit the <a href="Help/index.html">Help</a> page</p>
+            </section>
+        </header>
+
+        <main class="generator">
+            <!-- Top section of the page, containing the basic settings for the pool. -->
+            <section class="settings">
+                <!-- Only this is available at first. Determines which settings to further load. -->
+                <label for="varType">Variable set to use:</label>
+                <select name="varType">
+                    <option value="none" selected></option>
+                    <option value="rnd">Random variables</option>
+                    <option value="csv">CSV variables</option>
+                </select>
+                <!-- If option rnd is chosen this loads. Determines the number of variables
+                and its values. -->
+                <article class="choosernd choose variable hide">
+                    <div class="head">
+                        <a class="button add"><i class="fas fa-plus"></i>Add variable</a>
+                        <a class="button remove"><i class="fas fa-minus"></i>Remove variable</a>
+                        <a class="button save"><i class="fas fa-times"></i>Save</a>
+                    </div>
+                    <div class="collection">
+                        <!-- This is the container that is replacted for each variable. -->
+                        <template class="template variable">
+                            <article class="variable random">
+                                <aside>
+                                    <label for="numVars">Placeholder:</label>
+                                    <input type="text" class="var_placeholder" name="numVars" value="var">
+                                </aside>
+                                <aside>
+                                    <label for="min">Min:</label>
+                                    <input name="min" type="text" value="0">
+                                </aside>
+                                <aside>
+                                    <label for="max">Max:</label><input name="max" type="text" value="1">
+                                </aside>
+                                <aside>
+                                    <label for="decimal">Decimal places:</label><input name="decimal" type="text" value="2">
+                                </aside>
+                            </article>
+                        </template>
+                    </div>
+                </article>
+
+                <!--- If option csv is chosen this loads. Allows for .CSV to be loaded and shows preview-->
+                <article class="choosecsv choose variable hide">
+                    <input class="csv" accept=".csv, text/plain" type="file">
+                    <p class="note"></p>
+                    <article class="notice csv">
+
+                    </article>
+                </article>
+            </section>
+
+            <article class="poolSettings">
+                <aside>
+                    <label for="title">Pool title:</label>
+                    <input name="title" class="poolTitle"/>
+                </aside>
+                <aside>
+                    <label for="desc">Pool description:</label>
+                    <input name="desc" class="poolDesc"/>
+                </aside>
+                <aside>
+                    <label for="instructions">Pool instructions:</label>
+                    <input name="instructions" class="poolInstructions"/>
+                </aside>
+            </article>
+
+            <section class="questions">
+                <article class="questionCounter">
+                    <a class="button save prog"><i class="far fa-save"></i>Save progress</a>
+                    <a class="button import prog"><i class="fas fa-file-import"></i>Load progress</a>
+                    <br>
+                    <a class="button add question"><i class="fas fa-plus"></i>Add question</a>
+                    <p class="info">You have <span id="questionNum">0</span> question(s).</p>
+                </article>
+                <article class="collection">
+                    <!-- This is the question container that is replicated. -->
+                    <template class="template question">
+                        <section class="question">
+                            <article class="head">
+                                <a class="button collapse"><i class="fas fa-toggle-on"></i>Toggle</a>
+                                <a class="button remove"><i class="fas fa-minus"></i>Remove</a>
+                            </article>
+                            <div class="question body">
+                            <article class="edit_question">
+                                <aside class="qHolder">
+                                    <label for="editQuestion">Question:</label>
+                                    <textarea type="text" class="edit" name="editQuestion"></textarea>
+                                </aside>
+                                <aside class="qHolder">
+                                    <label for="previewQuestion">Question Preview:</label>
+                                    <div type="text" class="preview" name="previewQuestion"><p></p></div>
+                                </aside>
+                            </article>
+                            <article class="edit_incorr_feedback">
+                                <aside class="qHolder">
+                                    <label for="editIncorrFeedback">Incorrect answer feedback:</label>
+                                    <textarea type="text" class="edit" name="editIncorrFeedback"></textarea>
+                                </aside>
+                                <aside class="qHolder">
+                                    <label for="previewIncorrFeedback">Incorrect answer feedback preview:</label>
+                                    <div type="text" class="preview" name="previewIncorrFeedback"><p></p></div>
+                                </aside>
+                            </article>
+                            <article class="edit_corr_feedback">
+                                <aside class="qHolder">
+                                    <label for="editCorrFeedback">Correct answer feedback:</label>
+                                    <textarea type="text" class="edit" name="editCorrFeedback"></textarea>
+                                </aside>
+                                <aside class="qHolder">
+                                    <label for="previewCorrFeedback">Correct answer feedback preview:</label>
+                                    <div type="text" class="preview" name="previewCorrFeedback"><p></p></div>
+                                </aside>
+                            </article>
+
+                            <label for="answerType">Answer type:</label>
+                            <select name="answerType">
+                                <option value="null" selected disabled></option>
+                                <option value="NUM">Numeric answer</option>
+                                <option value="MC">Multiple choice</option>
+                                <option value="MA">Multiple answer</option>
+                                <option value="TF">True/false</option>
+                                <!--option value="ESS">Essay</option-->
+                                <option value="ORD">Ordering</option>
+                            </select>
+
+                            <article id="answerContainer">
+                                <article id="num" class="answerType hide">
+                                    <aside>
+                                        <label for="numericAnswer">Numerical answer:</label>
+                                        <textarea type="text" name="numericAnswer"></textarea>
+                                    </aside>
+                                    <aside>
+                                        <label for="acceptedError">Accepted error (±):</label>
+                                        <textarea type="text" name="acceptedError"></textarea>
+                                    </aside>
+                                    <aside>
+                                        <label for="answerPreview">Answer preview:</label>
+                                        <div type="text" class="preview" name="answerPreview"><p></p></div>
+                                    </aside>
+                                </article>
+
+                                <article id="mc" class="answerType hide">
+                                    <!-- A field or something for correct answer choice need to be implemented -->
+                                    <div class="head">
+                                        <a class="button add"><i class="fas fa-plus"></i>Add choice</a>
+                                    </div>
+                                    <aside class="addChoice">
+                                        <template class="template choice">
+                                            <div class="choice">
+                                                <aside>
+                                                    <a class="button remove"><i class="fas fa-minus"></i></a>
+                                                    <label class="inline" for="correct">Correct Answer</label>
+                                                    <input type="radio" name="correct">
+                                                </aside>
+                                                <aside class="head">
+                                                    <input type="text" name="answer" placeholder="Answer">
+                                                </aside>
+                                            </div>
+                                        </template>
+                                    </aside>
+                                    <aside class="preview">
+                                        <!--label for="previewIncorrFeedback">Answer preview:</label>
+
+                                        <select name="" id="">
+                                            <option value="">Choice 1</option>
+                                            <option value="">Choice 2</option>
+                                        </select-->
+                                    </aside>
+                                </article>
+
+                                <article id="ma" class="answerType hide">
+                                    <div class="head">
+                                        <a class="button add"><i class="fas fa-plus"></i>Add answer</a>
+                                    </div>
+                                    <aside class="addChoice">
+                                        <template class="template manswer">
+                                            <div class="choice">
+                                                <aside>
+                                                    <a class="button remove"><i class="fas fa-minus"></i></a>
+                                                    <label for="choice" class="inline">Correct answer</label>
+                                                    <input type="checkbox" name="choice"/>
+                                                </aside>
+                                                <div class="manswer">
+                                                    <input type="text" name="answer" placeholder="Answer">
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </aside>
+                                </article>
+
+                                <article id="tf" class="answerType hide">
+                                    <aside>
+                                        <label>Answer:</label>
+                                        <label for="true">True</label>
+                                        <input type="radio" class="tfradio true" name="true" value="True"/>
+
+                                        <label for="false">False</label>
+                                        <input type="radio" class="tfradio false" name="false" value="False"/>
+                                    </aside>
+                                </article>
+
+                                <article id="ess"  class="answerType hide">
+                                    <aside>
+                                        <label for="previewIncorrFeedback">Answer:</label>
+                                        <textarea type="text" name="previewFeedback"></textarea>
+                                    </aside>
+                                    <aside class="preview">
+                                        <label for="previewIncorrFeedback">Answer preview:</label>
+                                        <textarea type="text" name="previewFeedback"></textarea>
+                                    </aside>
+                                </article>
+
+                                <article id="ord" class="answerType hide">
+                                    <div>
+                                        <a class="button add order"><i class="fas fa-plus"></i>Add option</a>
+                                        <a class="button remove order"><i class="fas fa-minus"></i>Remove option</a>
+                                    </div>
+
+
+                                    <section class="answers">
+                                        <!-- This is replicated -->
+                                        <template class="template ordering">
+                                            <div class="orderOption">
+                                                <i class="fas fa-chevron-up"></i>
+                                                <input type="text" name="orderValue">
+                                                <i class="fas fa-chevron-down"></i>
+                                            </div>
+                                        </template>
+
+                                    </section>
+                                    <!--
+                                    This can be done by setting the css property "order" with js,
+                                    and have a correct order saved in the database that's loaded
+
+                                    eg
+                                    div#myPinkDIV  {order: 1;}
+                                    div#myRedDIV  {order: 3;}
+                                    div#myBlueDIV  {order: 2;}
+
+                                    Tho i'm not really sure on this, need to see how the whole thing works
+                                    -->
+                                </article>
+                            </article>
+
+                            <!-- Add inputs for different type of answers, for now its just numeric -->
+                        </div>
+                        </section>
+                    </template>
+                </article>
+            </section>
+
+            <section class="buttons">
+                <a class="button generate questions"><i class="fas fa-download"></i>Download questions</a>
+                <a class="button generate pool"><i class="fas fa-download"></i>Download pool</a>
+            </section>
+        </main>
+        <!-- jquery load -->
+        <footer class="main" id="footer-placeholder"></footer>
+
+        <script src="js/md5.js"></script>
+        <script src="js/jszip.js"></script>
+        <script src="js/init.js"></script>
+        <script src="js/app.js"></script>
+    </body>
+</html>
